@@ -93,10 +93,11 @@ func newNetworkConfig(args *skel.CmdArgs) (*NetworkConfig, error) {
 	}
 
 	result := &NetworkConfig{
-		ContainerID:   args.ContainerID,
-		NetNS:         args.Netns,
-		InterfaceName: getInterfaceName(),
-		MTU:           getDefaultGwInterfaceMTU(),
+		ContainerID:         args.ContainerID,
+		NetNS:               args.Netns,
+		InterfaceName:       getInterfaceName(),
+		MTU:                 getDefaultGwInterfaceMTU(),
+		DefaultRouteEnabled: conf.DefaultRouteEnabled,
 	}
 
 	k8sArgs := K8sArgs{}

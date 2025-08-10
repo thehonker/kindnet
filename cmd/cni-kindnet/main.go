@@ -32,7 +32,7 @@ const (
 	hostPortMapv6 = "hostport-map-v6"
 	// containerd hardcodes this value
 	// https://github.com/containerd/containerd/blob/23500b8015c6f5c624ec630fd1377a990e9eccfb/internal/cri/server/helpers.go#L68
-	defaultInterface = "eth0"
+	defaultInterface = "kind0"
 	// cniConfigPath is where kindnetd will write the computed CNI config
 	cniConfigPath = "/etc/cni/net.d"
 
@@ -178,8 +178,9 @@ type PortMapEntry struct {
 
 type KindnetConf struct {
 	types.NetConf
-	Ranges        []string `json:"ranges,omitempty"`
-	RuntimeConfig struct {
+	Ranges              []string `json:"ranges,omitempty"`
+	DefaultRouteEnabled bool     `json:"defaultRouteEnabled,omitempty"`
+	RuntimeConfig       struct {
 		PortMaps []PortMapEntry `json:"portMappings,omitempty"`
 	} `json:"runtimeConfig,omitempty"`
 }
@@ -208,6 +209,8 @@ type NetworkConfig struct {
 	MTU int
 	// Portmaps
 	PortMaps []PortMapConfig
+	// Should this interface have a default route
+	DefaultRouteEnabled bool
 }
 
 type PortMapConfig struct {

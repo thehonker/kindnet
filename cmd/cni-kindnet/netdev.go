@@ -205,15 +205,17 @@ func createPodInterface(netconf *NetworkConfig) error {
 			return fmt.Errorf("could not add route to default gw on namespace %s : %w", netconf.NetNS, err)
 		}
 
-		// set the route from the network namespace to the host
-		defaultRoute := netlink.Route{
-			LinkIndex: nsLink.Attrs().Index,
-			Src:       netconf.IPv4,
-			Gw:        netconf.GWv4,
-			Dst:       &net.IPNet{IP: net.IPv4zero, Mask: net.CIDRMask(0, 0)},
-		}
-		if err := nhNs.RouteAdd(&defaultRoute); err != nil {
-			return fmt.Errorf("could not add default route on namespace %s : %w", netconf.NetNS, err)
+		if netconf.DefaultRouteEnabled {
+			// set the route from the network namespace to the host
+			defaultRoute := netlink.Route{
+				LinkIndex: nsLink.Attrs().Index,
+				Src:       netconf.IPv4,
+				Gw:        netconf.GWv4,
+				Dst:       &net.IPNet{IP: net.IPv4zero, Mask: net.CIDRMask(0, 0)},
+			}
+			if err := nhNs.RouteAdd(&defaultRoute); err != nil {
+				return fmt.Errorf("could not add default route on namespace %s : %w", netconf.NetNS, err)
+			}
 		}
 
 		// set the route from the host to the network namespace
@@ -260,15 +262,17 @@ func createPodInterface(netconf *NetworkConfig) error {
 			return fmt.Errorf("could not add route to default gw on namespace %s : %w", netconf.NetNS, err)
 		}
 
-		// set the route from the network namespace to the host
-		defaultRoute := netlink.Route{
-			LinkIndex: nsLink.Attrs().Index,
-			Gw:        netconf.GWv6,
-			Dst:       &net.IPNet{IP: net.IPv6zero, Mask: net.CIDRMask(0, 0)},
-		}
+		if netconf.DefaultRouteEnabled {
+			// set the route from the network namespace to the host
+			defaultRoute := netlink.Route{
+				LinkIndex: nsLink.Attrs().Index,
+				Gw:        netconf.GWv6,
+				Dst:       &net.IPNet{IP: net.IPv6zero, Mask: net.CIDRMask(0, 0)},
+			}
 
-		if err := nhNs.RouteAdd(&defaultRoute); err != nil {
-			return fmt.Errorf("could not add default route on namespace %s : %w", netconf.NetNS, err)
+			if err := nhNs.RouteAdd(&defaultRoute); err != nil {
+				return fmt.Errorf("could not add default route on namespace %s : %w", netconf.NetNS, err)
+			}
 		}
 
 		route := netlink.Route{
