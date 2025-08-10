@@ -3,14 +3,14 @@
 ## Overview
 
 If you want to try Kubernetes with IPv6 you can have a working IPv6 cluster using
- then [kindnet CNI plugin](https://github.com/aojea/kindnet)
+ then [kindnet CNI plugin](https://github.com/thehonker/kindnet)
 
 To test it we can use the [kind project](https://github.com/kubernetes-sigs/kind)
 to create a Docker in Docker Kubernetes cluster in your host.
 
 ## Requirements
 
-Support for IPv6 in `kind` is still a WIP, but you can use [this provisional fork](https://github.com/aojea/kind/releases/tag/v.0.1-alpha) in the meantime.
+Support for IPv6 in `kind` is still a WIP, but you can use [this provisional fork](https://github.com/thehonker/kind/releases/tag/v.0.1-alpha) in the meantime.
 
 Remember that you have to enable IPv6 in your host and in [your Docker daemon](https://docs.docker.com/config/daemon/ipv6/)
 
@@ -25,7 +25,7 @@ chmod +x kubectl
 cp kubectl /usr/local/bin
 
 # Kind with IPv6 support using kindnet
-curl -LO https://github.com/aojea/kind/releases/download/v.0.1-alpha/kind_linux_amd64.gz
+curl -LO https://github.com/thehonker/kind/releases/download/v.0.1-alpha/kind_linux_amd64.gz
 gunzip kind_linux_amd64.gz
 chmod +x  kind_linux_amd64
 cp kind_linux_amd64 /usr/local/bin/kind

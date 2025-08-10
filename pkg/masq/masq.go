@@ -8,10 +8,10 @@ import (
 	"net/netip"
 	"time"
 
-	"github.com/aojea/kindnet/pkg/network"
 	"github.com/google/nftables"
 	"github.com/google/nftables/binaryutil"
 	"github.com/google/nftables/expr"
+	"github.com/thehonker/kindnet/pkg/network"
 	"golang.org/x/sys/unix"
 
 	v1 "k8s.io/api/core/v1"

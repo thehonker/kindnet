@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: aojea/kindnetd
+  IMAGE_NAME: thehonker/kindnetd
 
 jobs:
    publish:

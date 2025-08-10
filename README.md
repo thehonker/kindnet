@@ -51,7 +51,7 @@ Kindnet can be installed on your cluster using the manifest [install-kindnet.yam
 
 ```sh
 kubectl create -f
-https://raw.githubusercontent.com/aojea/kindnet/main/install-kindnet.yaml
+https://raw.githubusercontent.com/thehonker/kindnet/main/install-kindnet.yaml
 ```
 
 ## Contributing

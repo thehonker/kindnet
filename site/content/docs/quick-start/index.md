@@ -14,11 +14,11 @@ It leverages the host's network stack for external communication, eliminating th
 
 ## Installation
 
-Kindnet can be installed on your cluster using the manifest [install-kindnet.yaml](https://raw.githubusercontent.com/aojea/kindnet/main/install-kindnet.yaml)
+Kindnet can be installed on your cluster using the manifest [install-kindnet.yaml](https://raw.githubusercontent.com/thehonker/kindnet/main/install-kindnet.yaml)
 
 ```sh
 kubectl create -f
-https://raw.githubusercontent.com/aojea/kindnet/main/install-kindnet.yaml
+https://raw.githubusercontent.com/thehonker/kindnet/main/install-kindnet.yaml
 ```
 
 Kindnet provides IPAM to the Pods and other functionality like Network Policies, check the documentation for more advanced use cases.

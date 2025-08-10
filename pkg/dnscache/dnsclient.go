@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com/aojea/kindnet/pkg/network"
+	"github.com/thehonker/kindnet/pkg/network"
 	"golang.org/x/net/dns/dnsmessage"
 	"golang.org/x/sys/unix"
 	"k8s.io/klog/v2"

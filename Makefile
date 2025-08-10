@@ -35,7 +35,7 @@ update:
 # get image name from directory we're building
 IMAGE_NAME=kindnetd
 # docker image registry, default to upstream
-REGISTRY?=ghcr.io/aojea
+REGISTRY?=ghcr.io/thehonker
 # tag based on date-sha
 TAG?=$(shell echo "$$(date +v%Y%m%d)-$$(git describe --always --dirty)")
 # the full image tag

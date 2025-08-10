@@ -1,4 +1,4 @@
-module github.com/aojea/kindnet
+module github.com/thehonker/kindnet
 
 go 1.24.0
 

@@ -19,7 +19,7 @@ env:
   KIND_VERSION: "v0.27.0"
   KIND_CLUSTER_NAME: "kindnet"
   REGISTRY: ghcr.io
-  IMAGE_NAME: aojea/kindnetd
+  IMAGE_NAME: thehonker/kindnetd
 
 jobs:
   build:
@@ -37,9 +37,9 @@ jobs:
 
     - name: Build
       run: |
-        docker build -t ghcr.io/aojea/kindnetd:test -f Dockerfile .
+        docker build -t ghcr.io/thehonker/kindnetd:test -f Dockerfile .
         mkdir _output
-        docker save ghcr.io/aojea/kindnetd:test  > _output/kindnetd-image.tar
+        docker save ghcr.io/thehonker/kindnetd:test  > _output/kindnetd-image.tar
 
     - uses: actions/upload-artifact@v4
       with:
@@ -127,12 +127,12 @@ jobs:
       run: |
         # preload kindnetd image
         docker load --input kindnetd-image.tar
-        /usr/local/bin/kind load docker-image ghcr.io/aojea/kindnetd:test --name ${{ env.KIND_CLUSTER_NAME}}
+        /usr/local/bin/kind load docker-image ghcr.io/thehonker/kindnetd:test --name ${{ env.KIND_CLUSTER_NAME}}
 
     - name: install ptp plugin
       if: ${{ matrix.cniMode == 'ptp' }}
       run: |
-        sed -i s#aojea/kindnetd.*#aojea/kindnetd:test# install-kindnet.yaml
+        sed -i s#thehonker/kindnetd.*#thehonker/kindnetd:test# install-kindnet.yaml
         # Debug CI failures
         sed -i s#--v=2#--v=4# install-kindnet.yaml
         /usr/local/bin/kubectl apply -f ./install-kindnet.yaml
@@ -140,7 +140,7 @@ jobs:
     - name: enable ipsec
       if: ${{ matrix.cniMode == 'ipsec' }}
       run: |
-        sed -i s#aojea/kindnetd.*#aojea/kindnetd:test# install-kindnet.yaml
+        sed -i s#thehonker/kindnetd.*#thehonker/kindnetd:test# install-kindnet.yaml
         sed -i s#ipsec-overlay=false#ipsec-overlay=true# install-kindnet.yaml
         /usr/local/bin/kubectl apply -f ./install-kindnet.yaml
 

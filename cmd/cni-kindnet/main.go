@@ -24,7 +24,7 @@ import (
 
 // Only implement the minimum functionality defined by CNI required Kubernetes use cases.
 // Uses a sqlite file to provide an API for dynamic configuration.
-// xref: https://gist.github.com/aojea/571c29f1b35e5c411f8297a47227d39d
+// xref: https://gist.github.com/thehonker/571c29f1b35e5c411f8297a47227d39d
 
 const (
 	pluginName    = "cni-kindnet"

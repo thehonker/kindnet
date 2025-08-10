@@ -13,12 +13,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aojea/kindnet/pkg/network"
 	"github.com/florianl/go-nfqueue"
 	"github.com/google/nftables"
 	"github.com/google/nftables/binaryutil"
 	"github.com/google/nftables/expr"
 	"github.com/mdlayher/netlink"
+	"github.com/thehonker/kindnet/pkg/network"
 
 	"golang.org/x/net/dns/dnsmessage"
 	"golang.org/x/sys/unix"
@@ -144,7 +144,7 @@ func (d *DNSCacheAgent) Run(ctx context.Context) error {
 	// i.e. your application will need to be able to handle packets larger than the mtu.
 	// Normalization is expensive, so this flag should always be set.
 	// This also solves a bug with SCTP
-	// https://github.com/aojea/kube-netpol/issues/8
+	// https://github.com/thehonker/kube-netpol/issues/8
 	// https://bugzilla.netfilter.org/show_bug.cgi?id=1742
 	flags := uint32(nfqueue.NfQaCfgFlagGSO + nfqueue.NfQaCfgFlagFailOpen)
 
