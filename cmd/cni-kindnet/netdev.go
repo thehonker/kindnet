@@ -19,7 +19,7 @@ import (
 )
 
 func createPodInterface(netconf *NetworkConfig) error {
-	iifName := defaultInterface      // veth interface name in the container
+	iifName := netconf.InterfaceName // veth interface name in the container
 	oofName := netconf.InterfaceName // veth interface name in the host
 
 	// Get network namespace file descriptors
