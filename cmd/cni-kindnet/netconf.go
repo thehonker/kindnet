@@ -326,6 +326,8 @@ func NewAllocator(cidr netip.Prefix) (*Allocator, error) {
 	hostsBits := cidr.Addr().BitLen() - cidr.Bits()
 	if hostsBits >= 64 {
 		size = math.MaxInt64
+	} else if hostsBits == 32 {
+		size = 1
 	} else {
 		size = uint64(1) << uint(hostsBits)
 	}
@@ -339,6 +341,11 @@ func NewAllocator(cidr netip.Prefix) (*Allocator, error) {
 	ipLast, err := broadcastAddress(cidr)
 	if err != nil {
 		return nil, err
+	}
+
+	if size == 1 {
+		ipFirst = cidr.Masked().Addr()
+		ipLast = cidr.Masked().Addr()
 	}
 
 	return &Allocator{
