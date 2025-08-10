@@ -328,28 +328,12 @@ func NewAllocator(cidr netip.Prefix) (*Allocator, error) {
 	} else {
 		size = uint64(1) << uint(hostsBits)
 	}
-	// skip the network address
-	size = size - 1
 
 	// leave some space free at the beginning since some environments
 	// use those IPs to install well known servvices.
-	reserved := 6
-	if size <= 64 {
-		reserved = 2
-	} else if size <= 128 {
-		reserved = 4
-	}
+	reserved := 0
 
-	// Caching the first, offset and last addresses allows to optimize
-	// the search loops by using the netip.Addr iterator instead
-	// of having to do conversions with IP addresses.
-	// Don't allocate the network's ".0" address.
-	ipFirst := cidr.Masked().Addr().Next()
-	// Don't allocate in the reserved zone
-	ipFirst, err := addOffsetAddress(ipFirst, uint64(reserved))
-	if err != nil {
-		return nil, err
-	}
+	ipFirst := cidr.Masked().Addr()
 	// Use the broadcast address as last address for IPv6
 	ipLast, err := broadcastAddress(cidr)
 	if err != nil {
